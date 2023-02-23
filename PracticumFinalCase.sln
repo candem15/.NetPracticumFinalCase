@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.Domain", "src\Core\PracticumFinalCase.Domain\PracticumFinalCase.Domain.csproj", "{B0755648-DCEB-4209-83BF-7D9C6EB26538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.Application", "src\Core\PracticumFinalCase.Application\PracticumFinalCase.Application.csproj", "{5E765468-F6D5-4B73-BAF6-A08004657771}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.Infrastructure", "src\Infrastructure\PracticumFinalCase.Infrastructure\PracticumFinalCase.Infrastructure.csproj", "{558B23C4-83B6-4F16-BDD1-EF26AC5B1A19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.Persistence", "src\Infrastructure\PracticumFinalCase.Persistence\PracticumFinalCase.Persistence.csproj", "{7D528EEF-4C28-491A-84C8-A045F4243376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.WebApi", "src\Presentation\PracticumFinalCase.WebApi\PracticumFinalCase.WebApi.csproj", "{07F942D8-B8D5-4B2B-841B-DFA8AE1693D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0755648-DCEB-4209-83BF-7D9C6EB26538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0755648-DCEB-4209-83BF-7D9C6EB26538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0755648-DCEB-4209-83BF-7D9C6EB26538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0755648-DCEB-4209-83BF-7D9C6EB26538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E765468-F6D5-4B73-BAF6-A08004657771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E765468-F6D5-4B73-BAF6-A08004657771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E765468-F6D5-4B73-BAF6-A08004657771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E765468-F6D5-4B73-BAF6-A08004657771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558B23C4-83B6-4F16-BDD1-EF26AC5B1A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558B23C4-83B6-4F16-BDD1-EF26AC5B1A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558B23C4-83B6-4F16-BDD1-EF26AC5B1A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558B23C4-83B6-4F16-BDD1-EF26AC5B1A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D528EEF-4C28-491A-84C8-A045F4243376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D528EEF-4C28-491A-84C8-A045F4243376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D528EEF-4C28-491A-84C8-A045F4243376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D528EEF-4C28-491A-84C8-A045F4243376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07F942D8-B8D5-4B2B-841B-DFA8AE1693D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07F942D8-B8D5-4B2B-841B-DFA8AE1693D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07F942D8-B8D5-4B2B-841B-DFA8AE1693D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07F942D8-B8D5-4B2B-841B-DFA8AE1693D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B960BAA-740E-49EC-8EB3-DFE4BBEB7F1D}
+	EndGlobalSection
+EndGlobal
