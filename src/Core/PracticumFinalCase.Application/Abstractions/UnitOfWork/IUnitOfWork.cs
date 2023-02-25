@@ -1,15 +1,11 @@
-﻿using PracticumFinalCase.Application.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PracticumFinalCase.Application.Abstractions.Repositories;
+using PracticumFinalCase.Domain.Models;
 
 namespace PracticumFinalCase.Application.Abstractions.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        //IGenericRepository<Account> AccountRepository { get; }
+        IGenericRepository<User> UserRepository { get; }
         //IGenericRepository<Person> PersonRepository { get; }
 
         Task CompleteAsync();

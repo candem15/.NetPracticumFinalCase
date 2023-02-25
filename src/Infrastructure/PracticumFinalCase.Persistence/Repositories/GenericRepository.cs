@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PracticumFinalCase.Application.Abstractions.Repositories;
 using PracticumFinalCase.Persistence.Contexts;
+using System.Linq.Expressions;
 
 namespace PracticumFinalCase.Persistence.Repositories
 {
@@ -26,6 +27,14 @@ namespace PracticumFinalCase.Persistence.Repositories
         public virtual async Task<Entity> GetByIdAsync(int entityId)
         {
             return await entities.FindAsync(entityId);
+        }
+
+        public async Task<IEnumerable<Entity>> GetWhereAsync(Expression<Func<Entity, bool>> method, bool isTracking = true)
+        {
+            var query = entities.AsQueryable();
+            if (!isTracking)
+                query = entities.AsNoTracking();
+            return query.Where(method);
         }
 
         public async Task InsertAsync(Entity entity)

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PracticumFinalCase.Domain.Entities;
+using PracticumFinalCase.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +18,13 @@ namespace PracticumFinalCase.Persistence.Contexts
         }
 
         // dbsets
-        public DbSet<Account> Account { get; set; }
-        //public DbSet<Person> Person { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<ShoppingList> ShoppingLists { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

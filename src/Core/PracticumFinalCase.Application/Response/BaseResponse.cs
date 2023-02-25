@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PracticumFinalCase.Application.Response
+﻿namespace PracticumFinalCase.Application.Response
 {
     public class BaseResponse<T>
     {

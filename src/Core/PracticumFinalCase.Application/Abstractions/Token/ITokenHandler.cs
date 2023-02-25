@@ -1,15 +1,11 @@
 ﻿using PracticumFinalCase.Application.Dtos.Token;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PracticumFinalCase.Domain.Models;
 
 namespace PracticumFinalCase.Application.Abstractions.Token
 {
     public interface ITokenHandler
     {
-        TokenDto CreateAccessToken(int seconds, AppUser user);
+        TokenDto CreateAccessToken(int minutes, User user);
         string CreateRefreshToken();
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using PracticumFinalCase.Application.Abstractions.Token;
 using PracticumFinalCase.Application.Dtos.Token;
+using PracticumFinalCase.Domain.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -16,7 +17,7 @@ namespace PracticumFinalCase.Infrastructure.Token
         {
             _configuration = configuration;
         }
-        public TokenDto CreateAccessToken(int seconds, AppUser user)
+        public TokenDto CreateAccessToken(int seconds, User user)
         {
             TokenDto token = new();
 

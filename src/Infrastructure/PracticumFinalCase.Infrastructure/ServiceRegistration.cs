@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PracticumFinalCase.Application.Abstractions.Token;
+using PracticumFinalCase.Infrastructure.Token;
 
 namespace PracticumFinalCase.Infrastructure
 {
@@ -6,9 +8,7 @@ namespace PracticumFinalCase.Infrastructure
     {
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
-            //services.AddMediatR(typeof(ServiceRegistration));
-            //services.AddAutoMapper(typeof(ServiceRegistration));
-            //services.AddHttpClient();
+            services.AddScoped<ITokenHandler, TokenHandler>();
         }
     }
 }
