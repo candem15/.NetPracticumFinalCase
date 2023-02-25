@@ -15,7 +15,7 @@ namespace PracticumFinalCase.Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            services.AddMediatR((Assembly.GetExecutingAssembly()));
             //services.AddAutoMapper(typeof(ServiceRegistration));
             //services.AddHttpClient();
             // mapper

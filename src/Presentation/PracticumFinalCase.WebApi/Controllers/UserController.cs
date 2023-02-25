@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PracticumFinalCase.Application.Features.Commands.User.LoginUser;
@@ -17,6 +18,7 @@ namespace PracticumFinalCase.WebApi.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize]
         public async Task<IActionResult> Login(LoginUserCommandRequest loginUserCommandRequest)
         {
             var response = await _mediator.Send(loginUserCommandRequest);

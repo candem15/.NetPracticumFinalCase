@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace PracticumFinalCase.Application.Dtos.Token
 {
-    public class TokenDto : BaseDto
+    public class TokenDto
     {
         public string AccessToken { get; set; }
         public DateTime Expiration { get; set; }
         public string RefreshToken { get; set; }
+        public string Role { get; set; }
+        public string UserName { get; set; }
     }
 }

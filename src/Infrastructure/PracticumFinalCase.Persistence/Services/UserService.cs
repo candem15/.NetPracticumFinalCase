@@ -8,6 +8,7 @@ using PracticumFinalCase.Application.Dtos.User;
 using PracticumFinalCase.Application.Response;
 using PracticumFinalCase.Domain.Models;
 using PracticumFinalCase.Persistence.Extensions;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,17 +33,26 @@ namespace PracticumFinalCase.Persistence.Services
             User user = (User)await unitOfWork.UserRepository.GetWhereAsync(x => x.UserName == dto.Username);
 
             if (user == null)
-                throw new Exception("");
+            {
+                Log.Error("InvalidUserInformation");
+                return new BaseResponse<TokenDto>("InvalidUserInformation");
+            }
 
             var passwordVerified = PasswordHasherExtension.VerifyPassword(dto.Password, user.Password);
 
-            if (passwordVerified)
+            if (!passwordVerified)
             {
-                TokenDto token = tokenHandler.CreateAccessToken(30, user);
-                return new BaseResponse<TokenDto>(token);
+                Log.Error("InvalidUserInformation");
+                return new BaseResponse<TokenDto>("InvalidUserInformation");
+
             }
 
-            throw new Exception("");
+            user.LastActivity = DateTime.Now;
+            unitOfWork.UserRepository.Update(user);
+            await unitOfWork.CompleteAsync();
+
+            TokenDto token = tokenHandler.CreateAccessToken(30, user);
+            return new BaseResponse<TokenDto>(token);
         }
     }
 }

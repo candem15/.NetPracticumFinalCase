@@ -36,7 +36,14 @@ namespace PracticumFinalCase.Infrastructure.Token
                 expires: token.Expiration,
                 notBefore: DateTime.UtcNow,
                 signingCredentials: signingCredentials,
-                claims: new List<Claim>() { new(ClaimTypes.Name, user.UserName) }
+                claims: new[]
+                            {
+                                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                                new Claim(ClaimTypes.Name, user.UserName),
+                                new Claim(ClaimTypes.Role, user.Role),
+                                new Claim("AccountId", user.Id.ToString()),
+                                new Claim("LastActivity", user.LastActivity.ToLongTimeString())
+                            }
                 );
 
             //Token oluşturucu sınıfından bir örnek alalım.

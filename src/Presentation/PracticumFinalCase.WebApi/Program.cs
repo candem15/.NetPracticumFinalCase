@@ -1,6 +1,7 @@
 using PracticumFinalCase.Application;
 using PracticumFinalCase.Infrastructure;
 using PracticumFinalCase.Persistence;
+using PracticumFinalCase.WebApi.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
+
+// Custom swagger implementation
+builder.Services.AddCustomizeSwagger();
 
 // Serilog
 Log.Logger = new LoggerConfiguration()
@@ -31,6 +35,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// auth jtw
+app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
