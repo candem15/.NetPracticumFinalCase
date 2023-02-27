@@ -1,14 +1,16 @@
 using PracticumFinalCase.Application;
 using PracticumFinalCase.Infrastructure;
 using PracticumFinalCase.Persistence;
+using PracticumFinalCase.Persistence.Contexts;
 using PracticumFinalCase.WebApi.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddApplicationServices();
-builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 
 // Custom swagger implementation
@@ -32,6 +34,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Apply seeding and migration to db
+
+app.MigrateDbContext<AppDbContext>((context, services) =>
+{
+    var logger = services.GetService<ILogger<AppDbContext>>();
+
+    var dbContextSeeder = new AppDbContextSeed();
+
+    dbContextSeeder.SeedAsync(context, logger).Wait();
+});
+
 
 app.UseHttpsRedirection();
 

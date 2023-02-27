@@ -51,6 +51,11 @@ namespace PracticumFinalCase.Infrastructure.Token
             token.AccessToken = tokenHandler.WriteToken(jwtSecurityToken);
 
             token.RefreshToken = CreateRefreshToken();
+
+            token.Role = user.Role;
+
+            token.UserName = user.UserName;
+
             return token;
         }
 

@@ -6,15 +6,13 @@ namespace PracticumFinalCase.Persistence.Contexts
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        private readonly IConfiguration configuration;
-
-        public DesignTimeDbContextFactory(IConfiguration configuration)
+        public DesignTimeDbContextFactory()
         {
-            this.configuration = configuration;
+
         }
         public AppDbContext CreateDbContext(string[] args)
         {
-            var connectionString = configuration.GetConnectionString("SqlServerConnection");
+            var connectionString = Configuration.ConnectionStringSqlServer;
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlServer(connectionString);

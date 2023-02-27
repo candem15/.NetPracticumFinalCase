@@ -22,7 +22,6 @@ namespace PracticumFinalCase.Persistence.Repositories
 
         public async Task<User> GetWhereFirstOrDefault(Expression<Func<User, bool>> method, bool isTracking = true)
         {
-           
             var query = dbContext.Users.AsQueryable();
             if (!isTracking)
                 query = dbContext.Users.AsNoTracking();
