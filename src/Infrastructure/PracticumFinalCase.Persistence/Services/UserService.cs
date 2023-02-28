@@ -30,7 +30,7 @@ namespace PracticumFinalCase.Persistence.Services
 
         public async Task<BaseResponse<TokenDto>> LoginAsync(UserLoginDto dto)
         {
-            User user = (await unitOfWork.UserRepository.GetWhereAsync(x => x.UserName == dto.Username)).FirstOrDefault();
+            User user = await unitOfWork.UserRepository.GetWhereFirstOrDefault(x => x.UserName == dto.Username);
 
             if (user == null)
             {

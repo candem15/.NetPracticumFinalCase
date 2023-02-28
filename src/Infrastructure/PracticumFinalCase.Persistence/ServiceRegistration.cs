@@ -22,9 +22,16 @@ namespace PracticumFinalCase.Persistence
 
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
 
             services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
+            services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+            services.AddScoped<IGenericRepository<ShoppingList>, GenericRepository<ShoppingList>>();
+
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IShoppingListService, ShoppingListService>();
 
             var optBuilder = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(Configuration.ConnectionStringSqlServer);
 

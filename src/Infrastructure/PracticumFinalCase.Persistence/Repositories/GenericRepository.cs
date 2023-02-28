@@ -29,7 +29,7 @@ namespace PracticumFinalCase.Persistence.Repositories
             return await entities.FindAsync(entityId);
         }
 
-        public async Task<IEnumerable<Entity>> GetWhereAsync(Expression<Func<Entity, bool>> method, bool isTracking = true)
+        public virtual async Task<IEnumerable<Entity>> GetWhereAsync(Expression<Func<Entity, bool>> method, bool isTracking = true)
         {
             var query = entities.AsQueryable();
             if (!isTracking)

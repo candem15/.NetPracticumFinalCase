@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PracticumFinalCase.Domain.Models;
+using PracticumFinalCase.Persistence.EntityConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace PracticumFinalCase.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Entity configurations applied.
+            builder.ApplyConfiguration(new ShoppingListEntityConfiguration());
+            builder.ApplyConfiguration(new ProductEntityConfiguration());
+            builder.ApplyConfiguration(new UserEntityConfiguration());
+
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

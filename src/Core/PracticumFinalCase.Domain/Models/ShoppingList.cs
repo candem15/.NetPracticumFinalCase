@@ -11,6 +11,7 @@ namespace PracticumFinalCase.Domain.Models
     {
         public string Title { get; set; }
         public string CategoryName { get; set; }
+        public int OwnerId { get; set; }
         public User Owner { get; set; }
         public List<Product> Products { get; set; }
     }

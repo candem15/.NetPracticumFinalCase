@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracticumFinalCase.Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using PracticumFinalCase.Persistence.Contexts;
 namespace PracticumFinalCase.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230228004239_Migration_4")]
+    partial class Migration_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,9 +96,15 @@ namespace PracticumFinalCase.Persistence.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("OwnerId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ShoppingList", (string)null);
                 });
@@ -167,10 +176,14 @@ namespace PracticumFinalCase.Persistence.Migrations
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.ShoppingList", b =>
                 {
                     b.HasOne("PracticumFinalCase.Domain.Models.User", "Owner")
-                        .WithMany("ShoppingLists")
-                        .HasForeignKey("OwnerId")
+                        .WithOne()
+                        .HasForeignKey("PracticumFinalCase.Domain.Models.ShoppingList", "OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("PracticumFinalCase.Domain.Models.User", null)
+                        .WithMany("ShoppingLists")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Owner");
                 });

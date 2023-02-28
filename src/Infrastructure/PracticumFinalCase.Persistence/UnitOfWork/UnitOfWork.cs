@@ -3,6 +3,7 @@ using PracticumFinalCase.Application.Abstractions.UnitOfWork;
 using PracticumFinalCase.Domain.Models;
 using PracticumFinalCase.Persistence.Contexts;
 using PracticumFinalCase.Persistence.Repositories;
+using Serilog;
 
 namespace PracticumFinalCase.Persistence.UnitOfWork
 {
@@ -11,15 +12,17 @@ namespace PracticumFinalCase.Persistence.UnitOfWork
         private readonly AppDbContext dbContext;
         public bool disposed;
 
-        public IGenericRepository<User> UserRepository { get; private set; }
-        //public IGenericRepository<Person> PersonRepository { get; private set; }
+        public IUserRepository UserRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
+        public IShoppingListRepository ShoppingListRepository { get; private set; }
 
         public UnitOfWork(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
 
-            UserRepository = new GenericRepository<User>(dbContext);
-            //PersonRepository = new GenericRepository<Person>(dbContext);
+            UserRepository = new UserRepository(dbContext);
+            ProductRepository = new ProductRepository(dbContext);
+            ShoppingListRepository = new ShoppingListRepository(dbContext);
         }
 
         public async Task CompleteAsync()
@@ -33,7 +36,7 @@ namespace PracticumFinalCase.Persistence.UnitOfWork
                 }
                 catch (Exception ex)
                 {
-                    // logging                    
+                    Log.Error($"Exception occurred while committing db. Exception: {ex}");                          
                     dbContextTransaction.Rollback();
                 }
             }

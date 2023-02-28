@@ -1,13 +1,12 @@
-﻿using PracticumFinalCase.Domain.Models.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracticumFinalCase.Domain.Models
+namespace PracticumFinalCase.Application.Dtos.Product
 {
-    public class Product : BaseModel
+    public class ProductDto
     {
         public string Name { get; set; }
         public string Description { get; set; }

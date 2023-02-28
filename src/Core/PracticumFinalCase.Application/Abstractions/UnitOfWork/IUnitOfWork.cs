@@ -5,9 +5,9 @@ namespace PracticumFinalCase.Application.Abstractions.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<User> UserRepository { get; }
-        //IGenericRepository<Person> PersonRepository { get; }
-
+        IUserRepository UserRepository { get; }
+        IProductRepository ProductRepository { get; }
+        IShoppingListRepository ShoppingListRepository { get; }
         Task CompleteAsync();
     }
 }

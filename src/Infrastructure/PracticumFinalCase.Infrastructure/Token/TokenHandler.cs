@@ -17,7 +17,7 @@ namespace PracticumFinalCase.Infrastructure.Token
         {
             _configuration = configuration;
         }
-        public TokenDto CreateAccessToken(int seconds, User user)
+        public TokenDto CreateAccessToken(int minutes, User user)
         {
             TokenDto token = new();
 
@@ -28,7 +28,7 @@ namespace PracticumFinalCase.Infrastructure.Token
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
             //Oluşturulacak token ayarlarını veriyoruz.
-            token.Expiration = DateTime.UtcNow.AddSeconds(seconds);
+            token.Expiration = DateTime.UtcNow.AddMinutes(minutes);
             JwtSecurityToken jwtSecurityToken = new JwtSecurityToken
                 (
                 audience: _configuration["Token:Audience"],

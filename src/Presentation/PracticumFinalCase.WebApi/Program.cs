@@ -13,8 +13,11 @@ builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 
-// Custom swagger implementation
+// Custom swagger implementation.
 builder.Services.AddCustomizeSwagger();
+
+// Custom jwt authentication configured.
+builder.Services.AddJwtBearerAuthentication(builder.Configuration);
 
 // Serilog
 Log.Logger = new LoggerConfiguration()
