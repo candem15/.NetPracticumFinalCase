@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation.Results;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,12 +43,15 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{Id:int}")]
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse<ProductDto>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetByIdAsync([FromRoute] GetProductByIdQueryRequest request)
         {
+            if (request.Id < 1)
+                return BadRequest(new BaseResponse<ProductDto>("InvalidId"));
+
             var result = await mediator.Send(request);
 
             if (result.Success)
@@ -55,15 +59,24 @@ namespace PracticumFinalCase.WebApi.Controllers
                 Log.Debug("ProductController.GetByIdAsync");
                 return Ok(result);
             }
-            return Unauthorized();
+
+            return BadRequest(new BaseResponse<ProductDto>("InvalidId"));
         }
 
         [HttpPost]
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse<NoContentResult>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>),(int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProductCommandRequest request)
         {
+            ValidationResult validationResult = new CreateProductCommandRequestValidator().Validate(request);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(new BaseResponse<BadRequestResult>(validationResult.Errors.Select(x => x.ErrorMessage).ToList()));
+            }
+
             var result = await mediator.Send(request);
 
             if (result.Success)
@@ -78,8 +91,16 @@ namespace PracticumFinalCase.WebApi.Controllers
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse<NoContentResult>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductCommandRequest request)
         {
+            ValidationResult validationResult = new UpdateProductCommandRequestValidator().Validate(request);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(new BaseResponse<BadRequestResult>(validationResult.Errors.Select(x => x.ErrorMessage).ToList()));
+            }
+
             var result = await mediator.Send(request);
 
             if (result.Success)
@@ -90,12 +111,16 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpDelete("{Id}")]
+        [HttpDelete("{Id:int}")]
         [Authorize]
-        [ProducesResponseType(typeof(BaseResponse<>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BaseResponse<ProductDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> DeleteAsync([FromRoute]DeleteProductCommandRequest request)
         {
+            if (request.Id < 1)
+                return BadRequest(new BaseResponse<BadRequestResult>("InvalidId"));
+
             var result = await mediator.Send(request);
 
             if (result.Success)

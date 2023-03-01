@@ -15,11 +15,21 @@ namespace PracticumFinalCase.Application.Mappings
     {
         public MappingProfile()
         {
+            //Product mappings
             CreateMap<Product, ProductDto>().ReverseMap();
+
+            //User mappings
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, CreateUserDto>().ReverseMap();
+
+            //ShoppingList mappings
             CreateMap<ShoppingList, ShoppingListDto>()
                 .ForMember(dest => dest.OwnerUserName, opt => opt.MapFrom(src => src.Owner.Name))
                 .ReverseMap();
+            CreateMap<ShoppingList, UpdateShoppingListDto>()
+               .ForMember(dest => dest.ProductsId, opt => opt.MapFrom(src => src.Products.Select(x => x.Id).ToList()))
+               .ReverseMap();
+
         }
     }
 }

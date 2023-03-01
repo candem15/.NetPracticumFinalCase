@@ -28,6 +28,7 @@ namespace PracticumFinalCase.Domain.Types
 
     public class Category
     {
+        public static List<string> Categories = new() { StationeryOffice, Grocery, Electronic, Fashion, SportOutdoor };
         public const string StationeryOffice = "Ofis-Kırtasiye";
         public const string Grocery = "Süpermarket";
         public const string Electronic = "Elektronik";

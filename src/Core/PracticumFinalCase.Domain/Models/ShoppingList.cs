@@ -14,5 +14,7 @@ namespace PracticumFinalCase.Domain.Models
         public int OwnerId { get; set; }
         public User Owner { get; set; }
         public List<Product> Products { get; set; }
+        public bool IsCompleted { get; set; }
+        public DateTime? CompletionDate { get; set; }
     }
 }

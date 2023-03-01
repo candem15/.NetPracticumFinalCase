@@ -2,6 +2,7 @@
 using PracticumFinalCase.Application.Abstractions.Repositories;
 using PracticumFinalCase.Application.Abstractions.Services;
 using PracticumFinalCase.Application.Abstractions.UnitOfWork;
+using PracticumFinalCase.Application.Dtos.ShoppingList;
 using PracticumFinalCase.Application.Response;
 using Serilog;
 
@@ -33,6 +34,13 @@ namespace PracticumFinalCase.Persistence.Services
         public virtual async Task<BaseResponse<Dto>> GetByIdAsync(int id)
         {
             var tempEntity = await genericRepository.GetByIdAsync(id);
+
+            if (tempEntity == null)
+            {
+                Log.Information("Record with given id not found!");
+                return new BaseResponse<Dto>("Record with given id not found!");
+            }
+
             // Mapping Entity to Resource
             var result = mapper.Map<Entity, Dto>(tempEntity);
 
@@ -51,7 +59,7 @@ namespace PracticumFinalCase.Persistence.Services
 
                 var mapped = mapper.Map<Entity, Dto>(tempEntity);
 
-                return new BaseResponse<Dto>(mapped);
+                return new BaseResponse<Dto>(true);
             }
             catch (Exception ex)
             {
@@ -67,12 +75,12 @@ namespace PracticumFinalCase.Persistence.Services
                 // Validate Id is existent
                 var tempEntity = await genericRepository.GetByIdAsync(id);
                 if (tempEntity is null)
-                    return new BaseResponse<Dto>("Id_NoData");
+                    return new BaseResponse<Dto>("No data found with given id!");
 
                 genericRepository.Remove(tempEntity);
                 await unitOfWork.CompleteAsync();
 
-                return new BaseResponse<Dto>(mapper.Map<Entity, Dto>(tempEntity));
+                return new BaseResponse<Dto>(true);
             }
             catch (Exception ex)
             {
@@ -91,14 +99,14 @@ namespace PracticumFinalCase.Persistence.Services
                     return new BaseResponse<Dto>("NoData");
                 // Update infomation
                 var mapped = mapper.Map(updateResource, tempEntity);
-
+               
                 genericRepository.Update(mapped);
                 await unitOfWork.CompleteAsync();
 
                 // Mapping
                 var resource = mapper.Map<Entity, Dto>(mapped);
 
-                return new BaseResponse<Dto>(resource);
+                return new BaseResponse<Dto>(true);
             }
             catch (Exception ex)
             {

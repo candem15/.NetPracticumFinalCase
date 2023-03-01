@@ -10,6 +10,6 @@ namespace PracticumFinalCase.Application.Abstractions.Repositories
 {
     public interface IShoppingListRepository : IGenericRepository<ShoppingList>
     {
-
+        void CompleteAsync(int id);
     }
 }

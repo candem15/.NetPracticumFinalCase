@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PracticumFinalCase.Application.Abstractions.Repositories;
 using PracticumFinalCase.Domain.Models;
+using PracticumFinalCase.Domain.Types;
 using PracticumFinalCase.Persistence.Contexts;
+using PracticumFinalCase.Persistence.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,20 @@ namespace PracticumFinalCase.Persistence.Repositories
             if (!isTracking)
                 query = dbContext.Users.AsNoTracking();
             return query.Where(method).FirstOrDefault();
+        }
+
+        public override async Task InsertAsync(User entity)
+        {
+            entity.Password = PasswordHasherExtension.HashPasword(entity.Password);
+            entity.Role = Role.BasicUser;
+            entity.LastActivity = DateTime.Now;
+            await base.InsertAsync(entity);
+        }
+
+        public override void Update(User entity)
+        {
+            entity.Password = PasswordHasherExtension.HashPasword(entity.Password);
+            base.Update(entity);
         }
     }
 }

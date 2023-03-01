@@ -5,8 +5,9 @@ using PracticumFinalCase.Domain.Models;
 
 namespace PracticumFinalCase.Application.Abstractions.Services
 {
-    public interface IUserService : IBaseService<UserDto, User>
+    public interface IUserService : IBaseService<object, User>
     {
         Task<BaseResponse<TokenDto>> LoginAsync(UserLoginDto dto);
+        Task<BaseResponse<object>> ResetPasswordAsync(ResetUserPasswordDto dto);
     }
 }

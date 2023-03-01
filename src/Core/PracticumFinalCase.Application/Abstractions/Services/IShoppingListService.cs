@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace PracticumFinalCase.Application.Abstractions.Services
 {
-    public interface IShoppingListService : IBaseService<ShoppingListDto, ShoppingList>
+    public interface IShoppingListService : IBaseService<Object, ShoppingList>
     {
         Task<BaseResponse<IEnumerable<ShoppingListDto>>> GetShoppingListsByTitle(string title);
+        Task<BaseResponse<ShoppingListDto>> InsertWithOnwerAsync(CreateShoppingListDto insertResource, int ownerId);
+        Task<BaseResponse<object>> CompleteAsync(int id);
     }
 }

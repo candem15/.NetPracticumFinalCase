@@ -21,6 +21,8 @@ namespace PracticumFinalCase.Persistence.EntityConfigurations
 
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
+            builder.Property(i => i.IsCompleted).HasDefaultValue(false);
+
             builder.Property(i => i.CategoryName).HasColumnType("CategoryName").HasColumnType("varchar").HasMaxLength(100);
 
             builder.HasOne<User>(x=>x.Owner)

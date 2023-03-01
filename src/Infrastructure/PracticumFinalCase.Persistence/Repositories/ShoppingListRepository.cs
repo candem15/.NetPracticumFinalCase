@@ -20,6 +20,17 @@ namespace PracticumFinalCase.Persistence.Repositories
             this.dbContext = dbContext;
         }
 
+        public void CompleteAsync(int id)
+        {
+            var entity = dbContext.ShoppingLists.FirstOrDefault(x => x.Id == id);
+
+            entity.IsCompleted = true;
+
+            entity.CompletionDate = DateTime.Now;
+
+             dbContext.Update(entity);
+        }
+
         public override async Task<IEnumerable<ShoppingList>> GetWhereAsync(Expression<Func<ShoppingList, bool>> method, bool isTracking = true)
         {
             var query = dbContext.ShoppingLists.Include(x => x.Owner).Include(x => x.Products).AsQueryable();

@@ -37,8 +37,17 @@ namespace PracticumFinalCase.Persistence.Repositories
             return query.Where(method);
         }
 
-        public async Task InsertAsync(Entity entity)
+        public virtual async Task InsertAsync(Entity entity)
         {
+            var column = entity.GetType().GetProperty("CreatedAt");
+            var column2 = entity.GetType().GetProperty("UpdatedAt");
+
+            if(column is not null)
+                entity.GetType().GetProperty("CreatedAt").SetValue(entity, DateTime.Now);
+
+            if (column2 is not null)
+                entity.GetType().GetProperty("UpdatedAt").SetValue(entity, DateTime.Now);
+
             await entities.AddAsync(entity);
         }
 
@@ -55,8 +64,13 @@ namespace PracticumFinalCase.Persistence.Repositories
             }
         }
 
-        public void Update(Entity entity)
+        public virtual void Update(Entity entity)
         {
+            var column = entity.GetType().GetProperty("UpdatedAt");
+            if (column is not null)
+            {
+                entity.GetType().GetProperty("UpdatedAt").SetValue(entity, DateTime.Now);
+            }
             entities.Update(entity);
         }
     }

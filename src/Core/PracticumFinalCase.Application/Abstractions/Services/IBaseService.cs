@@ -1,4 +1,5 @@
-﻿using PracticumFinalCase.Application.Response;
+﻿using PracticumFinalCase.Application.Dtos.ShoppingList;
+using PracticumFinalCase.Application.Response;
 
 namespace PracticumFinalCase.Application.Abstractions.Services
 {

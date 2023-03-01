@@ -15,11 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\ShoppingList\CreateShoppingList\" />
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PracticumFinalCase.Domain\PracticumFinalCase.Domain.csproj" />
   </ItemGroup>
 
