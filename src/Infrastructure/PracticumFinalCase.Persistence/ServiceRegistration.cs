@@ -37,8 +37,8 @@ namespace PracticumFinalCase.Persistence
 
             using var dbContext = new AppDbContext(optBuilder.Options);
 
-            dbContext.Database.EnsureCreated();
             dbContext.Database.Migrate();
+            dbContext.Database.EnsureCreated();
         }
     }
 }

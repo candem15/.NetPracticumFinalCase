@@ -28,12 +28,12 @@ namespace PracticumFinalCase.Persistence.Repositories
 
             entity.CompletionDate = DateTime.Now;
 
-             dbContext.Update(entity);
+            dbContext.Update(entity);
         }
 
         public override async Task<IEnumerable<ShoppingList>> GetWhereAsync(Expression<Func<ShoppingList, bool>> method, bool isTracking = true)
         {
-            var query = dbContext.ShoppingLists.Include(x => x.Owner).Include(x => x.Products).AsQueryable();
+            var query = dbContext.ShoppingLists.Include(x => x.User).Include(x => x.Products).AsQueryable();
 
             if (!isTracking)
             {
@@ -41,6 +41,13 @@ namespace PracticumFinalCase.Persistence.Repositories
             }
 
             return query.Where(method);
+        }
+
+        public override async Task<ShoppingList> GetByIdAsync(int entityId)
+        {
+            var query = dbContext.ShoppingLists.Include(x => x.User).Include(x => x.Products).AsQueryable();
+
+            return await query.FirstOrDefaultAsync(x => x.Id == entityId);
         }
     }
 }

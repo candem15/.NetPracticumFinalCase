@@ -17,17 +17,17 @@ namespace PracticumFinalCase.Persistence.EntityConfigurations
 
             builder.HasKey(b => b.Id);
 
-            builder.Property(i => i.Title).HasColumnType("title").HasColumnType("varchar").HasMaxLength(100);
+            builder.Property(i => i.Title).HasColumnType("title").HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
             builder.Property(i => i.IsCompleted).HasDefaultValue(false);
 
-            builder.Property(i => i.CategoryName).HasColumnType("CategoryName").HasColumnType("varchar").HasMaxLength(100);
+            builder.Property(i => i.CategoryName).HasColumnType("CategoryName").HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
-            builder.HasOne<User>(x=>x.Owner)
+            builder.HasOne<User>(x=>x.User)
                 .WithMany(x=>x.ShoppingLists)
-                .HasForeignKey(x=>x.OwnerId)
+                .HasForeignKey(x=>x.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

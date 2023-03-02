@@ -34,10 +34,10 @@ namespace PracticumFinalCase.Persistence.Extensions
             byte[] salt = Convert.FromHexString(hash.Substring(128, 128));
 
             //Seperating password hash from salted Hash.
-            hash = hash.Substring(0, 128);
+            var existingHash = hash.Substring(0, 128);
 
             var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, hashAlgorithm, keySize);
-            return hashToCompare.SequenceEqual(Convert.FromHexString(hash));
+            return hashToCompare.SequenceEqual(Convert.FromHexString(existingHash));
         }
     }
 }

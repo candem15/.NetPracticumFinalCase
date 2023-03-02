@@ -9,11 +9,6 @@ using PracticumFinalCase.Application.Response;
 using PracticumFinalCase.Domain.Models;
 using PracticumFinalCase.Persistence.Extensions;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracticumFinalCase.Persistence.Services
 {
@@ -85,7 +80,7 @@ namespace PracticumFinalCase.Persistence.Services
                 // Mapping Resource to Entity
                 var tempEntity = mapper.Map<ResetUserPasswordDto, User>(dto);
 
-                unitOfWork.UserRepository.Update(tempEntity);
+                unitOfWork.UserRepository.UpdatePassword(tempEntity);
                 await unitOfWork.CompleteAsync();
 
                 Log.Information($"User with id: '{tempEntity.Id}' resetted password.");

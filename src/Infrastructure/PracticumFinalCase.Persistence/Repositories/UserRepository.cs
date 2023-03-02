@@ -37,8 +37,7 @@ namespace PracticumFinalCase.Persistence.Repositories
             entity.LastActivity = DateTime.Now;
             await base.InsertAsync(entity);
         }
-
-        public override void Update(User entity)
+        public void UpdatePassword(User entity)
         {
             entity.Password = PasswordHasherExtension.HashPasword(entity.Password);
             base.Update(entity);

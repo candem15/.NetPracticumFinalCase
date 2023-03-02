@@ -79,11 +79,16 @@ namespace PracticumFinalCase.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
+                    b.Property<DateTime?>("CompletionDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsCompleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -93,9 +98,12 @@ namespace PracticumFinalCase.Persistence.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ShoppingList", (string)null);
                 });
@@ -166,13 +174,13 @@ namespace PracticumFinalCase.Persistence.Migrations
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.ShoppingList", b =>
                 {
-                    b.HasOne("PracticumFinalCase.Domain.Models.User", "Owner")
+                    b.HasOne("PracticumFinalCase.Domain.Models.User", "User")
                         .WithMany("ShoppingLists")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Owner");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.ShoppingList", b =>

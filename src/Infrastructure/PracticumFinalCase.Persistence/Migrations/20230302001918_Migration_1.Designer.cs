@@ -12,7 +12,7 @@ using PracticumFinalCase.Persistence.Contexts;
 namespace PracticumFinalCase.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230226233015_Migration_1")]
+    [Migration("20230302001918_Migration_1")]
     partial class Migration_1
     {
         /// <inheritdoc />
@@ -38,11 +38,17 @@ namespace PracticumFinalCase.Persistence.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Measurement")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -60,7 +66,7 @@ namespace PracticumFinalCase.Persistence.Migrations
 
                     b.HasIndex("ShoppingListId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.ShoppingList", b =>
@@ -73,26 +79,36 @@ namespace PracticumFinalCase.Persistence.Migrations
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime?>("CompletionDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsCompleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingLists");
+                    b.ToTable("ShoppingList", (string)null);
                 });
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.User", b =>
@@ -108,14 +124,16 @@ namespace PracticumFinalCase.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("LastActivity")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -123,7 +141,9 @@ namespace PracticumFinalCase.Persistence.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nchar(10)")
+                        .IsFixedLength();
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -134,11 +154,18 @@ namespace PracticumFinalCase.Persistence.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.Product", b =>
@@ -150,13 +177,13 @@ namespace PracticumFinalCase.Persistence.Migrations
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.ShoppingList", b =>
                 {
-                    b.HasOne("PracticumFinalCase.Domain.Models.User", "Owner")
+                    b.HasOne("PracticumFinalCase.Domain.Models.User", "User")
                         .WithMany("ShoppingLists")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Owner");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PracticumFinalCase.Domain.Models.ShoppingList", b =>

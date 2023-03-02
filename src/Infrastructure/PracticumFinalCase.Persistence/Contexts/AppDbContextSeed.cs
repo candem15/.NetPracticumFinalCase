@@ -186,18 +186,20 @@ namespace PracticumFinalCase.Persistence.Contexts
                 new ShoppingList()
                 {
                     CategoryName = Category.Grocery,
-                    OwnerId = 4,
+                    UserId = 1,
                     Title = "Daily supplies",
                     Products= context.Products.Where(x=>x.Name=="Milk"||x.Name=="Bread"||x.Name=="Sugar").ToList(),
+                    IsCompleted=false,
                     CreatedAt = DateTime.Now,
                     UpdatedAt= DateTime.Now
                  },
                 new ShoppingList()
                 {
                     CategoryName = Category.StationeryOffice,
-                    OwnerId = 4,
+                    UserId = 1,
                     Title = "Painting course shopping",
                     Products= context.Products.Where(x=>x.Name=="Book"||x.Name=="Pencil").ToList(),
+                    IsCompleted=false,
                     CreatedAt = DateTime.Now,
                     UpdatedAt= DateTime.Now
                  }
