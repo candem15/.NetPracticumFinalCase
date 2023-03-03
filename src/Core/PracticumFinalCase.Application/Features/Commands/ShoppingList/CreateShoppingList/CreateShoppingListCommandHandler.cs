@@ -21,7 +21,7 @@ namespace PracticumFinalCase.Application.Features.Commands.ShoppingList.CreateSh
 
         public async Task<BaseResponse<ShoppingListDto>> Handle(CreateShoppingListCommandRequest request, CancellationToken cancellationToken)
         {
-            var result = await shoppingListService.InsertWithOnwerAsync(request.Dto , request.OwnerId);
+            var result = await shoppingListService.InsertWithOwnerAsync(request.Dto , request.OwnerId);
 
             return result;
         }

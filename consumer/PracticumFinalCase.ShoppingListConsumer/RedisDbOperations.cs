@@ -22,7 +22,7 @@ namespace PracticumFinalCase.ShoppingListConsumer
             string json = JsonConvert.SerializeObject(model);
 
             //set value in redis db
-            database.StringSet(model.Id.ToString(), json);
+            database.StringSet("#" + model.Id.ToString(), json);
         }
     }
 }

@@ -21,10 +21,9 @@ namespace PracticumFinalCase.WebApi.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         [ProducesResponseType(typeof(BaseResponse<TokenDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> LoginAsync([FromBody] LoginUserCommandRequest request)
         {
             ValidationResult validationResult = new LoginUserCommandRequestValidator().Validate(request);
@@ -36,13 +35,9 @@ namespace PracticumFinalCase.WebApi.Controllers
 
             var result = await mediator.Send(request);
 
-            if (result.Success)
-            {
-                Log.Information($"User: {result.Response.UserName}, Role: {result.Response.Role} is logged in.");
-                return Ok(result);
-            }
+            Log.Information($"User: {result.Response.UserName}, Role: {result.Response.Role} is logged in.");
 
-            return Unauthorized();
+            return Ok(result);
         }
 
     }

@@ -15,7 +15,8 @@ namespace PracticumFinalCase.Persistence.Contexts
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+            // Migration işlemi gereğinden uzun sürdüğü için hata alınırsa aşağıdaki satırı aktif ediniz.
+            //this.Database.SetCommandTimeout(999999);
         }
 
         // dbsets

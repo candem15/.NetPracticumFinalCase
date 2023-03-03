@@ -12,11 +12,11 @@ namespace PracticumFinalCase.Application.Features.Commands.Product.CreateProduct
     {
         public CreateProductCommandRequestValidator()
         {
-            RuleFor(x => x.dto.Name).NotEmpty().MinimumLength(3);
-            RuleFor(x => x.dto.Price).NotEmpty();
-            RuleFor(x => x.dto.Description).NotEmpty();
-            RuleFor(x => x.dto.Quantity).NotEmpty().GreaterThanOrEqualTo(1);
-            RuleFor(x => x.dto.Measurement).Must(x => Measurement.Measurements.Contains(x));
+            RuleFor(x => x.Dto.Name).NotEmpty().MinimumLength(3);
+            RuleFor(x => x.Dto.Price).NotEmpty();
+            RuleFor(x => x.Dto.Description).NotEmpty();
+            RuleFor(x => x.Dto.Quantity).NotEmpty().GreaterThanOrEqualTo(1);
+            RuleFor(x => x.Dto.Measurement).Must(x => Measurement.Measurements.Contains(x));
         }
     }
 }

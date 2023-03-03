@@ -26,11 +26,11 @@ namespace PracticumFinalCase.WebApi.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse<IEnumerable<ProductDto>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        public async Task<IActionResult> GetAllAsync([FromQuery]GetAllProductsQueryRequest request)
+        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllProductsQueryRequest request)
         {
             var result = await mediator.Send(request);
 
@@ -43,7 +43,7 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("GetById/{Id:int}")]
         [Authorize]
         [ProducesResponseType(typeof(BaseResponse<ProductDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -63,10 +63,10 @@ namespace PracticumFinalCase.WebApi.Controllers
             return BadRequest(new BaseResponse<ProductDto>("InvalidId"));
         }
 
-        [HttpPost]
-        [Authorize]
+        [HttpPost("Create")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(typeof(BaseResponse<NoContentResult>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>),(int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProductCommandRequest request)
         {
@@ -87,8 +87,8 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpPut]
-        [Authorize]
+        [HttpPut("Update")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(typeof(BaseResponse<NoContentResult>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
@@ -111,12 +111,12 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpDelete("{Id:int}")]
-        [Authorize]
+        [HttpDelete("Delete/{Id:int}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(typeof(BaseResponse<ProductDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> DeleteAsync([FromRoute]DeleteProductCommandRequest request)
+        public async Task<IActionResult> DeleteAsync([FromRoute] DeleteProductCommandRequest request)
         {
             if (request.Id < 1)
                 return BadRequest(new BaseResponse<BadRequestResult>("InvalidId"));

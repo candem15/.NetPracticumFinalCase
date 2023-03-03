@@ -11,6 +11,6 @@ namespace PracticumFinalCase.Application.Features.Commands.Product.CreateProduct
 {
     public class CreateProductCommandRequest : IRequest<BaseResponse<ProductDto>>
     {
-        public ProductDto dto { get; set; }
+        public ProductDto Dto { get; set; }
     }
 }

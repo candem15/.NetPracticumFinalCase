@@ -10,6 +10,8 @@ using PracticumFinalCase.Application.Features.Commands.ShoppingList.CompleteShop
 using PracticumFinalCase.Application.Features.Commands.ShoppingList.CreateShoppingList;
 using PracticumFinalCase.Application.Features.Commands.ShoppingList.DeleteShoppingList;
 using PracticumFinalCase.Application.Features.Commands.ShoppingList.UpdateShoppingList;
+using PracticumFinalCase.Application.Features.Queries.ShoppingList.GetShoppingListsByCategory;
+using PracticumFinalCase.Application.Features.Queries.ShoppingList.GetShoppingListsByCreateDate;
 using PracticumFinalCase.Application.Features.Queries.ShoppingList.GetShoppingListsByTitle;
 using PracticumFinalCase.Application.Response;
 using Serilog;
@@ -19,6 +21,7 @@ namespace PracticumFinalCase.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "basicUser")]
     public class ShoppingListController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -28,8 +31,7 @@ namespace PracticumFinalCase.WebApi.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet]
-        [Authorize(Roles = "admin,basicUser")]
+        [HttpGet("GetByTitle")]
         [ProducesResponseType(typeof(BaseResponse<IEnumerable<ShoppingListDto>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetShoppingListsByTitleAsync([FromQuery] GetShoppingListsByTitleQueryRequest request)
@@ -47,8 +49,43 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{Id:int}")]
-        [Authorize]
+        [HttpGet("GetByCreateDate")]
+        [ProducesResponseType(typeof(BaseResponse<IEnumerable<ShoppingListDto>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetShoppingListsByCreateDateAsync([FromQuery] GetShoppingListsByCreateDateQueryRequest request)
+        {
+            ValidationResult validationResult = new GetShoppingListsByCreateDateQueryRequestValidator().Validate(request);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(new BaseResponse<BadRequestResult>(validationResult.Errors.Select(x => x.ErrorMessage).ToList()));
+            }
+
+            var result = await mediator.Send(request);
+
+            Log.Debug("ShoppingListController.GetShoppingListsByCreateDateAsync");
+            return Ok(result);
+        }
+
+        [HttpGet("GetByCategory")]
+        [ProducesResponseType(typeof(BaseResponse<IEnumerable<ShoppingListDto>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetShoppingListsByCategoryAsync([FromQuery] GetShoppingListsByCategoryQueryRequest request)
+        {
+            ValidationResult validationResult = new GetShoppingListsByCategoryQueryRequestValidator().Validate(request);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(new BaseResponse<BadRequestResult>(validationResult.Errors.Select(x => x.ErrorMessage).ToList()));
+            }
+
+            var result = await mediator.Send(request);
+
+            Log.Debug("ShoppingListController.GetShoppingListsByCategoryAsync");
+            return Ok(result);
+        }
+
+        [HttpGet("Complete/{Id:int}")]
         [ProducesResponseType(typeof(BaseResponse<object>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -67,8 +104,7 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpPost]
-        [Authorize]
+        [HttpPost("Create")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -93,8 +129,7 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpPut]
-        [Authorize]
+        [HttpPut("Update")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -117,8 +152,7 @@ namespace PracticumFinalCase.WebApi.Controllers
             return Unauthorized();
         }
 
-        [HttpDelete("{Id:int}")]
-        [Authorize]
+        [HttpDelete("Delete/{Id:int}")]
         [ProducesResponseType(typeof(BaseResponse<object>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

@@ -19,7 +19,7 @@ namespace PracticumFinalCase.Persistence.Repositories
         }
 
 
-        public async Task<IEnumerable<Entity>> GetAllAsync()
+        public virtual async Task<IEnumerable<Entity>> GetAllAsync()
         {
             return await entities.AsNoTracking().ToListAsync();
         }

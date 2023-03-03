@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PracticumFinalCase.Application.Features.Commands.ShoppingList.UpdateShoppingList
 {
-    public class UpdateShoppingListCommandHandler : IRequestHandler<UpdateShoppingListCommandRequest, BaseResponse<Object>>
+    public class UpdateShoppingListCommandHandler : IRequestHandler<UpdateShoppingListCommandRequest, BaseResponse<object>>
     {
         private readonly IShoppingListService shoppingListService;
 
@@ -19,7 +19,7 @@ namespace PracticumFinalCase.Application.Features.Commands.ShoppingList.UpdateSh
             this.shoppingListService = shoppingListService;
         }
 
-        public async Task<BaseResponse<Object>> Handle(UpdateShoppingListCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<object>> Handle(UpdateShoppingListCommandRequest request, CancellationToken cancellationToken)
         {
             var result = await shoppingListService.UpdateAsync(request.Dto.Id, request.Dto);
 

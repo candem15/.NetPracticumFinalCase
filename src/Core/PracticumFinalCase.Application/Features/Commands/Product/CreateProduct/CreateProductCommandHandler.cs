@@ -21,7 +21,7 @@ namespace PracticumFinalCase.Application.Features.Commands.Product.CreateProduct
 
         public async Task<BaseResponse<ProductDto>> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            var result = await productService.InsertAsync(request.dto);
+            var result = await productService.InsertAsync(request.Dto);
 
             return result;
         }

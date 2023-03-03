@@ -23,7 +23,7 @@ namespace PracticumFinalCase.WebApi.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateUserCommandRequest request)

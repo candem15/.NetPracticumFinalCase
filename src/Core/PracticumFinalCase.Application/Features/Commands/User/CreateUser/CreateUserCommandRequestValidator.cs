@@ -16,7 +16,7 @@ namespace PracticumFinalCase.Application.Features.Commands.User.CreateUser
             RuleFor(x => x.Dto.Name).NotEmpty().MinimumLength(3);
             RuleFor(x => x.Dto.PhoneNumber).NotEmpty()
                     .Must(x => x.Length == 10).WithMessage("Your phone number must be 10 digits.")
-                    .Must(x => int.TryParse(x, out var val) && val > 0).WithMessage("Invalid phone number.");
+                    .Must(x => long.TryParse(x, out long val) && val >= 0).WithMessage("Invalid phone number.");
             RuleFor(x => x.Dto.Password).NotEmpty().WithMessage("Your password cannot be empty")
                     .MinimumLength(8).WithMessage("Your password length must be at least 8.")
                     .MaximumLength(16).WithMessage("Your password length must not exceed 16.")

@@ -16,13 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Middlewares\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Core\PracticumFinalCase.Application\PracticumFinalCase.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\PracticumFinalCase.Infrastructure\PracticumFinalCase.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\PracticumFinalCase.Persistence\PracticumFinalCase.Persistence.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+	<InternalsVisibleTo Include="PracticumFinalCase.IntegrationTest" />
   </ItemGroup>
 
 </Project>

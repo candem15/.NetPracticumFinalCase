@@ -16,9 +16,22 @@ namespace PracticumFinalCase.Persistence.Services
 {
     public class ProductService : BaseService<ProductDto, Product>, IProductService
     {
-        public ProductService(IGenericRepository<Product> genericRepository, IMapper mapper, IUnitOfWork unitOfWork) : base(genericRepository, mapper, unitOfWork)
-        {
+        private readonly IMapper mapper;
+        private readonly ICachedProductsRepository cachedProductsRepository;
 
+        public ProductService(IGenericRepository<Product> genericRepository, IMapper mapper, IUnitOfWork unitOfWork, ICachedProductsRepository cachedProductsRepository) : base(genericRepository, mapper, unitOfWork)
+        {
+            this.mapper = mapper;
+            this.cachedProductsRepository = cachedProductsRepository;
+        }
+
+        public override async Task<BaseResponse<IEnumerable<ProductDto>>> GetAllAsync()
+        {
+            IEnumerable<Product> products = await cachedProductsRepository.GetCachedProducts();
+
+            var mapped = mapper.Map<IEnumerable<ProductDto>>(products);
+
+            return new BaseResponse<IEnumerable<ProductDto>>(mapped);
         }
     }
 }

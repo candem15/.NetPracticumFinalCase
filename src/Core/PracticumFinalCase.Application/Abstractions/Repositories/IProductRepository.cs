@@ -9,5 +9,6 @@ namespace PracticumFinalCase.Application.Abstractions.Repositories
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
+
     }
 }

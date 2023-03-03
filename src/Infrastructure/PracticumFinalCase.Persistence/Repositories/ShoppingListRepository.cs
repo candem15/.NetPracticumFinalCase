@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PracticumFinalCase.Application.Abstractions.Repositories;
+using PracticumFinalCase.Application.Dtos.ShoppingList;
 using PracticumFinalCase.Domain.Models;
 using PracticumFinalCase.Persistence.Contexts;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;

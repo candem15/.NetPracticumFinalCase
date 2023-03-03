@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticumFinalCase.Persiste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticumFinalCase.WebApi", "src\Presentation\PracticumFinalCase.WebApi\PracticumFinalCase.WebApi.csproj", "{07F942D8-B8D5-4B2B-841B-DFA8AE1693D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.ShoppingListConsumer", "consumer\PracticumFinalCase.ShoppingListConsumer\PracticumFinalCase.ShoppingListConsumer.csproj", "{40EC0C93-D4DB-48B5-B0F4-BB72E818A8A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticumFinalCase.ShoppingListConsumer", "consumer\PracticumFinalCase.ShoppingListConsumer\PracticumFinalCase.ShoppingListConsumer.csproj", "{40EC0C93-D4DB-48B5-B0F4-BB72E818A8A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.UnitTest", "tests\PracticumFinalCase.UnitTest\PracticumFinalCase.UnitTest.csproj", "{34CC38E6-7C89-4B6D-965F-1B15664FCAFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticumFinalCase.IntegrationTest", "tests\PracticumFinalCase.IntegrationTest\PracticumFinalCase.IntegrationTest.csproj", "{8FF05723-07A4-4AF8-9024-41EDA085589A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{40EC0C93-D4DB-48B5-B0F4-BB72E818A8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40EC0C93-D4DB-48B5-B0F4-BB72E818A8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40EC0C93-D4DB-48B5-B0F4-BB72E818A8A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34CC38E6-7C89-4B6D-965F-1B15664FCAFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34CC38E6-7C89-4B6D-965F-1B15664FCAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34CC38E6-7C89-4B6D-965F-1B15664FCAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34CC38E6-7C89-4B6D-965F-1B15664FCAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF05723-07A4-4AF8-9024-41EDA085589A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF05723-07A4-4AF8-9024-41EDA085589A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF05723-07A4-4AF8-9024-41EDA085589A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF05723-07A4-4AF8-9024-41EDA085589A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

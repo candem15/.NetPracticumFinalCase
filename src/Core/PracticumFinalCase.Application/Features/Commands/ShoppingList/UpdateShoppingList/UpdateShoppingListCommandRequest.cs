@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PracticumFinalCase.Application.Features.Commands.ShoppingList.UpdateShoppingList
 {
-    public class UpdateShoppingListCommandRequest : IRequest<BaseResponse<Object>>
+    public class UpdateShoppingListCommandRequest : IRequest<BaseResponse<object>>
     {
         public UpdateShoppingListDto Dto { get; set; }
     }

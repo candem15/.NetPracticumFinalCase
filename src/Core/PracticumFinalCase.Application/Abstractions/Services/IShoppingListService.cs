@@ -12,7 +12,10 @@ namespace PracticumFinalCase.Application.Abstractions.Services
     public interface IShoppingListService : IBaseService<Object, ShoppingList>
     {
         Task<BaseResponse<IEnumerable<ShoppingListDto>>> GetShoppingListsByTitle(string title);
-        Task<BaseResponse<ShoppingListDto>> InsertWithOnwerAsync(CreateShoppingListDto insertResource, int ownerId);
+        Task<BaseResponse<IEnumerable<ShoppingListDto>>> GetShoppingListsByCategory(string categoryName);
+        Task<BaseResponse<ShoppingListDto>> InsertWithOwnerAsync(CreateShoppingListDto insertResource, int ownerId);
         Task<BaseResponse<object>> CompleteAsync(int id);
+        Task<BaseResponse<IEnumerable<ShoppingListDto>>> GetByCreateDateAsync(string createDate);
+
     }
 }
