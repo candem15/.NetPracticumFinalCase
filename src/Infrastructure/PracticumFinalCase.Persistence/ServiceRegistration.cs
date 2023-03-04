@@ -18,7 +18,7 @@ namespace PracticumFinalCase.Persistence
         {
             services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.ConnectionStringSqlServerTest);
+                opt.UseSqlServer(Configuration.ConnectionStringSqlServer);
             });
 
             services.AddSingleton(x => x.ConfigureRedis(redisHost: Configuration.RedisDbHost));
@@ -38,7 +38,7 @@ namespace PracticumFinalCase.Persistence
             services.AddScoped<IShoppingListService, ShoppingListService>();
 
             // Automized migration.
-            var optBuilder = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(Configuration.ConnectionStringSqlServerTest);
+            var optBuilder = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(Configuration.ConnectionStringSqlServer);
             using var dbContext = new AppDbContext(optBuilder.Options);
             
             dbContext.Database.Migrate();

@@ -25,7 +25,7 @@ namespace PracticumFinalCase.IntegrationTest.Endpoints
         }
 
         [Fact]
-        public async Task LoginAsync_Returns_StatusCodeOk_With_Response_BaseResponseTokenDto()
+        public async Task LoginAsync_When_ValidInputsAreGiven_Returns_StatusCodeOk_With_Response_BaseResponseTokenDto()
         {
             var content = new LoginUserCommandRequest();
             content.Dto = new Application.Dtos.User.UserLoginDto()
@@ -43,6 +43,51 @@ namespace PracticumFinalCase.IntegrationTest.Endpoints
             response.Content.ShouldNotBeNull();
             result.ShouldContain("Response");
             result.ShouldContain("AccessToken");
+            result.ShouldContain("UserName");
+            result.ShouldContain("Role");
+        }
+
+        [Fact]
+        public async Task LoginAsync_When_InvalidInputsAreGiven_Returns_StatusCodeBadRequest_With_ValidationErrors()
+        {
+            var content = new LoginUserCommandRequest();
+            content.Dto = new Application.Dtos.User.UserLoginDto()
+            {
+                Password = "",
+                Username = "",
+            };
+            var json = JsonConvert.SerializeObject(content);
+            var sendd = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("/api/Auth/Login", sendd);
+            var result = await response.Content.ReadAsStringAsync();
+
+            response.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
+            response.Content.ShouldNotBeNull();
+            result.ShouldContain("false");
+            result.ShouldNotContain("AccessToken");
+        }
+
+        [Fact]
+        public async Task LoginAsync_When_WrongUserInformationAreGiven_Returns_StatusCodeOk_With_InvalidUserInformation_Message()
+        {
+            var content = new LoginUserCommandRequest();
+            content.Dto = new Application.Dtos.User.UserLoginDto()
+            {
+                Password = "test",
+                Username = "testPass",
+            };
+            var json = JsonConvert.SerializeObject(content);
+            var sendd = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("/api/Auth/Login", sendd);
+            var result = await response.Content.ReadAsStringAsync();
+
+            response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+            response.Content.ShouldNotBeNull();
+            result.ShouldContain("false");
+            result.ShouldNotContain("AccessToken");
+            result.ShouldContain("InvalidUserInformation");
         }
     }
 }
