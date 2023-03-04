@@ -63,3 +63,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//.NET 6 compiler generates the Program class behind the scenes as the internal class, thus making it inaccessible in our integration testing project. So to solve this, we can create a public partial Program class.
+public partial class Program { }

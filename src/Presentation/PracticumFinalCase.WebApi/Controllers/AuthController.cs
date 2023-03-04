@@ -34,10 +34,20 @@ namespace PracticumFinalCase.WebApi.Controllers
             }
 
             var result = await mediator.Send(request);
-
-            Log.Information($"User: {result.Response.UserName}, Role: {result.Response.Role} is logged in.");
+            if (result.Success)
+                Log.Information($"User: {result.Response.UserName}, Role: {result.Response.Role} is logged in.");
 
             return Ok(result);
+        }
+
+        [HttpPost("test")]
+        [ProducesResponseType(typeof(BaseResponse<TokenDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BaseResponse<BadRequestResult>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> LogineAsync([FromQuery] LoginUserCommandRequest request)
+        {
+
+
+            return Ok();
         }
 
     }
