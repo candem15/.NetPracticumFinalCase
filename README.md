@@ -10,7 +10,7 @@
       * <a href="#Tools and Technologies">Kullanılan Araçlar ve Teknolojiler</a>
       * <a href="#Design Patterns and Archtitectures">Kullanılan Tasarım Desenleri ve Mimariler</a>
   2. <a href="#Build up Guide">Projeyi Nasıl Çalıştırabiliriz?</a>
-  3. <a href="#Contact">Contact</a>
+  3. <a href="#Contact">İletişim</a>
   
 </details>
 
@@ -92,7 +92,7 @@ https://learn.microsoft.com/en-us/visualstudio/ide/how-to-set-multiple-startup-p
 ```
 * Tüm bu adımları eksiksiz uygulandığınız senaryoda uygulamanız Postman, Swagger vb. araçlar üzerinden istek almaya hazırdır.
 
-# <p id="Contact">Contact</p>
+# <p id="Contact">İletişim</p>
 
 <div>
 <a href="https://www.linkedin.com/in/eray-berbero%C4%9Flu"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original-wordmark.svg" alt="LinkedIn" width="75"/></a>
