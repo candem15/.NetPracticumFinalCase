@@ -60,7 +60,8 @@ Kullanıcıların almayı planladıkları ürünleri kaydedip takibini yapabilec
 * Clean(Onion) Architecture
 * SOLID
 * DRY
-* Dependency Injection 
+* Dependency Injection
+* Unit, Integration testing
 </div> 
 
 # <p id="Build up Guide">Projeyi Nasıl Çalıştırabiliriz?</p>
