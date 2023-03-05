@@ -27,7 +27,7 @@ Kullanıcıların almayı planladıkları ürünleri kaydedip takibini yapabilec
 * Rabbitmq (Opsiyonel)
 * Redis (Opsiyonel)
 
-## <p id="Tools and Technologies">Kullanılan Araç ve Tekonolojiler</p>
+## <p id="Tools and Technologies">Kullanılan Araç ve Teknolojiler</p>
 <div>
 
 ### Araçlar  
