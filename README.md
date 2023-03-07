@@ -10,7 +10,7 @@
       * <a href="#Tools and Technologies">Kullanılan Araçlar ve Teknolojiler</a>
       * <a href="#Design Patterns and Archtitectures">Kullanılan Tasarım Desenleri ve Mimariler</a>
   2. <a href="#Build up Guide">Projeyi Nasıl Çalıştırabiliriz?</a>
-  3. <a href="#Outputs">Docker Containers ve Swagger UI Çıktıları</a>
+  3. <a href="#Outputs">Uygulamaya Dair Ekran Alıntıları</a>
   3. <a href="#Contact">İletişim</a>
   
 </details>
@@ -93,7 +93,7 @@ https://learn.microsoft.com/en-us/visualstudio/ide/how-to-set-multiple-startup-p
 ```
 * Tüm bu adımları eksiksiz uygulandığınız senaryoda uygulamanız Postman, Swagger vb. araçlar üzerinden istek almaya hazırdır.
 
-# <p id="Outputs">Docker Containers ve Swagger UI Çıktıları</p>
+# <p id="Outputs">Uygulamaya Dair Ekran Alıntıları</p>
 * Docker üzerinde vurguladığım containerlar üzerinde Redis ve RabbitMq çalışmaktadır.
 
 <a ><img src="https://i.imgur.com/A9Qch4x.png" alt="Docker" width="800"/></a>
@@ -113,6 +113,10 @@ https://learn.microsoft.com/en-us/visualstudio/ide/how-to-set-multiple-startup-p
 * Swagger UI üzerinde WebApi request ve response şemaları 2
 
 <a ><img src="https://i.imgur.com/W9FwXtg.png" alt="Swagger Schema 2" width="800"/></a>
+
+* Entegrasyon ve Birim testleri çıktısı
+
+<a ><img src="https://imgur.com/jNodVEc.png" alt="Tests" width="800"/></a>
 
 # <p id="Contact">İletişim</p>
 <div>
